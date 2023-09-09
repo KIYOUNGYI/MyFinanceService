@@ -1,0 +1,35 @@
+version: '3'
+services:
+    mysql:
+      image: mysql:8.0
+      networks:
+        - my_network
+      volumes:
+        - ./db/conf.d:/etc/mysql/conf.d # 내 로컬에서 /db/conf.d 파일이 실제 도커 내부 컨테이너의 /etc/mysql/conf.d 와 동기화 될 것이다.
+        - ./db/data:/var/lib/mysql
+        - ./db/initdb.d:/docker-entrypoint-initdb.d
+      env_file: .env # mysql 환경변수 파일
+      ports:
+        - "3306:3306"
+      environment:
+        - TZ=Asia/Seoul
+        - MYSQL_ROOT_PASSWORD=rootpassword
+        - MYSQL_USER=mysqluser
+        - MYSQL_PASSWORD=mysqlpw
+    member-service:
+      image: member-service:1.0.1
+      networks:
+        - my_network
+      ports:
+        - "8081:8080"#왼쪽 : os 레벨에서 컨테이너까지 어떤 포트로 매핑될 것인지 / 오른쪽 : 컨테이너 안에 있는 실제 어플리케이션 포트
+      depends_on:
+        - mysql # mysql 이 실행되어야지만 이 member-service 가 실행될 수 있다
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/finance?useSSL=false&allowPublicKeyRetrieval=true
+        - SPRING_DATASOURCE_USERNAME=mysqluser
+        - SPRING_DATASOURCE_PASSWORD=mysqlpw
+        - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+networks:
+  my_network:
+    driver: bridge

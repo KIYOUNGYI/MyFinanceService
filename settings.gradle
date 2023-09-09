@@ -1,0 +1,6 @@
+rootProject.name = 'MyFinanceService'
+include 'member-service'
+//include 'asset-admin'
+//include 'asset-client'
+//include 'beta-calculate-service'
+
