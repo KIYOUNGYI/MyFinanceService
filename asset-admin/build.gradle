@@ -21,8 +21,8 @@ apply plugin: 'java-library'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group 'org.likipay.member'
-version '1.0.1'
+group 'org.liki.admin'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -44,6 +44,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 
     implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -51,13 +53,23 @@ dependencies {
 
     implementation project(path: ':common')
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    //test
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('io.projectreactor:reactor-test')
+    testImplementation('ch.qos.logback:logback-classic:1.2.9')
+
+    testCompileOnly 'org.projectlombok:lombok' // 테스트 의존성 추가
+    testAnnotationProcessor 'org.projectlombok:lombok' // 테스트 의존성 추가
 
     //h2 사용을 위한 디펜던시
 //    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
 //    runtimeOnly 'com.mysql:mysql-connector-j'
+    testRuntimeOnly('com.h2database:h2')
+
 }
 
 ////그래들 과정에서 도커라이징 한다?
@@ -69,7 +81,7 @@ docker {
 
     //어떤 Dockerfile
 //    dockerfile file('./Dockerfile')//상대경로 (도커파일이 같은 레벨에 있었다면)
-    dockerfile file('../Dockerfile')//상대경로 (도커파일이 같은 레벨에 있었다면)
+    dockerfile file('../Dockerfile')//상대경로 (도커파일이 다른 레벨에 있으므로)
 
     //어떤 파일들을 Dockerfile 에 복사할 것인가
     files tasks.bootJar.outputs.files

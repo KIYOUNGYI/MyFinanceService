@@ -2,13 +2,14 @@ package org.liki.member.adapter.out.persistence;
 
 
 import lombok.RequiredArgsConstructor;
+import org.liki.common.PersistenceAdapter;
 import org.liki.member.application.port.out.RegisterMemberPort;
 import org.liki.member.domain.Member.MemberEmail;
 import org.liki.member.domain.Member.MemberIsValid;
 import org.liki.member.domain.Member.MemberName;
 import org.springframework.stereotype.Component;
 
-//@PersistenceAdapter
+@PersistenceAdapter
 @RequiredArgsConstructor
 @Component
 public class MemberPersistenceAdapter implements RegisterMemberPort {
