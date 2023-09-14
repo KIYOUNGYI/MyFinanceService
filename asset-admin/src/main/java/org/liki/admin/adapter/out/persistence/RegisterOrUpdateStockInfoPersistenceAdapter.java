@@ -14,7 +14,7 @@ public class RegisterOrUpdateStockInfoPersistenceAdapter implements RegisterOrUp
   private final SpringDataStockInfoRepository stockInfoRepository;
 
   @Override
-  public StockInfoJpaEntity registerOrUpdateStockInfo(StockInfo domain) {
+  public StockInfoJpaEntity registerStockInfo(StockInfo domain) {
 
     StockInfoJpaEntity save = stockInfoRepository.save(StockInfoJpaEntity.builder()
         .companyName(domain.getCompanyName())

@@ -7,6 +7,7 @@ import org.liki.admin.adapter.out.persistence.entity.StockInfoJpaEntity;
 import org.liki.admin.adapter.out.persistence.StockInfoJpaEntityToDomainMapper;
 import org.liki.admin.adapter.out.persistence.YahooFinStockInfoToStockInfoDomainMapper;
 import org.liki.admin.application.port.in.RegisterOrUpdateStockInfoUseCase;
+import org.liki.admin.application.port.out.GetStockInfoPort;
 import org.liki.admin.application.port.out.RegisterOrUpdateStockInfoPort;
 import org.liki.admin.application.port.out.RequestYahooFinStockInfoPort;
 import org.liki.admin.domain.StockInfo;
@@ -19,21 +20,32 @@ import org.springframework.transaction.annotation.Transactional;
 @UseCase
 public class RegisterOrUpdateStockInfoService implements RegisterOrUpdateStockInfoUseCase {
 
+  private final GetStockInfoPort getStockInfoPort;
   private final RegisterOrUpdateStockInfoPort registerStockInfoPort;
   private final RequestYahooFinStockInfoPort requestYahooFinStockInfoPort;
+
   @Override
   public StockInfo createOrUpdateStockInfo(String ticker) {
     log.error("RegisterStockInfoService.createOrUpdateStockInfo");
-    YahooFinStockInfoResponse yahooFinStockInfoResponse = requestYahooFinStockInfoPort.getStockInfo(ticker);
-    log.info("yahooFinStockInfoResponse => {}", yahooFinStockInfoResponse);
 
-    //yahooFinStockInfoResponse -> domain
+    StockInfoJpaEntity stockInfoByTicker = getStockInfoPort.getStockInfoByTicker(ticker);
+
+    YahooFinStockInfoResponse yahooFinStockInfoResponse = requestYahooFinStockInfoPort.getStockInfo(ticker);
+
     StockInfo domain = YahooFinStockInfoToStockInfoDomainMapper.yahooFinStockInfoToStockInfoDomainMapper(yahooFinStockInfoResponse, ticker);
 
-    //domain -> db (flush)
-    StockInfoJpaEntity entity = registerStockInfoPort.registerOrUpdateStockInfo(domain);
+    StockInfoJpaEntity entity;
 
-    //db -> domain
+    if (stockInfoByTicker == null) {
+
+      entity = registerStockInfoPort.registerStockInfo(domain);
+
+    } else {
+
+      entity = stockInfoByTicker.updateStockInfo(domain);
+
+    }
+
     return StockInfoJpaEntityToDomainMapper.stockInfoJpaEntityToDomain(entity);
   }
 }

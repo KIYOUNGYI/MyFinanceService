@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @WebAdapter
 @RestController
 @RequiredArgsConstructor
-public class RegisterMembershipController {
+public class RegisterMemberController {
 
   private final RegisterMemberUseCase registerMemberUseCase;
 

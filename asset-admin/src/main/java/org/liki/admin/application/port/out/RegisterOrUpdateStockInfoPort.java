@@ -5,5 +5,5 @@ import org.liki.admin.domain.StockInfo;
 
 public interface RegisterOrUpdateStockInfoPort {
 
-  StockInfoJpaEntity registerOrUpdateStockInfo(StockInfo domain);
+  StockInfoJpaEntity registerStockInfo(StockInfo domain);
 }
