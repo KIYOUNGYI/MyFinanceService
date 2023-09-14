@@ -30,6 +30,20 @@ services:
         - SPRING_DATASOURCE_PASSWORD=mysqlpw
         - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
         - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    asset-admin:
+      image: asset-admin:1.0.0
+      networks:
+        - my_network
+      ports:
+        - "8083:8080"#왼쪽 : os 레벨에서 컨테이너까지 어떤 포트로 매핑될 것인지 / 오른쪽 : 컨테이너 안에 있는 실제 어플리케이션 포트
+      depends_on:
+        - mysql # mysql 이 실행되어야지만 이 member-service 가 실행될 수 있다
+      environment:
+        - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/finance?useSSL=false&allowPublicKeyRetrieval=true
+        - SPRING_DATASOURCE_USERNAME=mysqluser
+        - SPRING_DATASOURCE_PASSWORD=mysqlpw
+        - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+        - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 networks:
   my_network:
     driver: bridge

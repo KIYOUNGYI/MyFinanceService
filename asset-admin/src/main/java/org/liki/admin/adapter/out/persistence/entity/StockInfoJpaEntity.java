@@ -1,4 +1,4 @@
-package org.liki.admin.adapter.out.persistence;
+package org.liki.admin.adapter.out.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -6,12 +6,14 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+//import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "StockInfo")
-@Data
+//@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class StockInfoJpaEntity {
@@ -59,5 +61,10 @@ public class StockInfoJpaEntity {
     this.previousClose = previousClose;
     this.quotePrice = quotePrice;
     this.volume = volume;
+  }
+
+  public StockInfoJpaEntity updateBeta(Double givenBetaValue){
+    this.beta = givenBetaValue;
+    return this;
   }
 }

@@ -3,10 +3,10 @@ package org.liki.admin.application.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.liki.admin.adapter.out.external.yfin.YahooFinStockInfoResponse;
-import org.liki.admin.adapter.out.persistence.StockInfoJpaEntity;
+import org.liki.admin.adapter.out.persistence.entity.StockInfoJpaEntity;
 import org.liki.admin.adapter.out.persistence.StockInfoJpaEntityToDomainMapper;
 import org.liki.admin.adapter.out.persistence.YahooFinStockInfoToStockInfoDomainMapper;
-import org.liki.admin.application.port.in.RegisterStockInfoUseCase;
+import org.liki.admin.application.port.in.RegisterOrUpdateStockInfoUseCase;
 import org.liki.admin.application.port.out.RegisterOrUpdateStockInfoPort;
 import org.liki.admin.application.port.out.RequestYahooFinStockInfoPort;
 import org.liki.admin.domain.StockInfo;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 @Transactional
 @UseCase
-public class RegisterStockInfoService implements RegisterStockInfoUseCase {
+public class RegisterOrUpdateStockInfoService implements RegisterOrUpdateStockInfoUseCase {
 
   private final RegisterOrUpdateStockInfoPort registerStockInfoPort;
   private final RequestYahooFinStockInfoPort requestYahooFinStockInfoPort;

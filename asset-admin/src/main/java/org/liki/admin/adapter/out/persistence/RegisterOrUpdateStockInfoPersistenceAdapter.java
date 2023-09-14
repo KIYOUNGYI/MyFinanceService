@@ -1,6 +1,8 @@
 package org.liki.admin.adapter.out.persistence;
 
 import lombok.RequiredArgsConstructor;
+import org.liki.admin.adapter.out.persistence.entity.StockInfoJpaEntity;
+import org.liki.admin.adapter.out.persistence.repository.SpringDataStockInfoRepository;
 import org.liki.admin.application.port.out.RegisterOrUpdateStockInfoPort;
 import org.liki.admin.domain.StockInfo;
 import org.liki.common.PersistenceAdapter;

@@ -1,5 +1,6 @@
 package org.liki.admin.adapter.out.persistence;
 
+import org.liki.admin.adapter.out.persistence.entity.StockInfoJpaEntity;
 import org.liki.admin.domain.StockInfo;
 import org.springframework.stereotype.Component;
 
