@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @WebAdapter
 @RestController
 @RequiredArgsConstructor
-public class RegisterMemberController {
+public class RetrieveMemberController {
 
   private final RegisterMemberUseCase registerMemberUseCase;
 
-  @PostMapping("/api/member")
+  @PostMapping("/api/member/register")
   Member registerMembership(@RequestBody RegisterMembershipRequest request) {
 
     RegisterMemberCommand command = RegisterMemberCommand.builder()
