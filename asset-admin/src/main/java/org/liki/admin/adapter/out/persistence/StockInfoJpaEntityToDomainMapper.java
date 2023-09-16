@@ -11,7 +11,7 @@ public class StockInfoJpaEntityToDomainMapper {
   public static StockInfo stockInfoJpaEntityToDomain(StockInfoJpaEntity entity) {
 
     return StockInfo.builder()
-        .idStockInfo(entity.getStockInfoId())
+        .stockInfoId(entity.getStockInfoId())
         .ticker(entity.getTicker())
         .oneYearTargetEst(entity.getOneYearTargetEst())
         .forwardDividendAndYield(entity.getForwardDividendAndYield())
