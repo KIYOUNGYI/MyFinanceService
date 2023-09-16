@@ -3,11 +3,11 @@ package org.liki.member.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
 import org.liki.common.WebAdapter;
-import org.liki.member.application.port.in.RegisterMemberCommand;
-import org.liki.member.application.port.in.RegisterMemberUseCase;
+import org.liki.member.application.port.in.GetMemberCommand;
+import org.liki.member.application.port.in.GetMemberUseCase;
 import org.liki.member.domain.Member;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -16,18 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RetrieveMemberController {
 
-  private final RegisterMemberUseCase registerMemberUseCase;
+  private final GetMemberUseCase getMemberUseCase;
 
-  @PostMapping("/api/member/register")
-  Member registerMembership(@RequestBody RegisterMembershipRequest request) {
+  @GetMapping("/api/member/register/{id}")
+  Member getMember(@PathVariable Long id) {
 
-    RegisterMemberCommand command = RegisterMemberCommand.builder()
-        .memberName(request.getMemberName())
-        .email(request.getEmail())
-        .isValid(true)
-        .build();
+    GetMemberCommand command = GetMemberCommand.builder().id(id).build();
 
-    return registerMemberUseCase.registerMember(command);
+    return getMemberUseCase.getMember(command);
 
   }
 }

@@ -26,7 +26,7 @@ public class StockInfoJpaEntity {
 
   @Id
   @GeneratedValue
-  private Long idStockInfo;
+  private Long stockInfoId;
   private String companyName;
   private String ticker;
   private Double oneYearTargetEst;
