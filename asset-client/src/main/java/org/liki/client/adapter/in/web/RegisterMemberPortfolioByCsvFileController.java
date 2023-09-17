@@ -3,7 +3,10 @@ package org.liki.client.adapter.in.web;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.liki.client.application.port.in.GetMemberCommand;
+import org.liki.client.application.port.in.GetMemberUseCase;
 import org.liki.client.application.port.in.RegisterMemberPortfolioByCsvUseCase;
+import org.liki.client.domain.Member;
 import org.liki.common.WebAdapter;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -16,8 +19,9 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-public class UploadMemberPortfolioByCsvFileController {
+public class RegisterMemberPortfolioByCsvFileController {
 
+  private final GetMemberUseCase getMemberUseCase;
   private final RegisterMemberPortfolioByCsvUseCase registerMemberPortfolioByCsvUseCase;
 
   @PostMapping("/api/portfolio/upload-csv")
@@ -27,8 +31,10 @@ public class UploadMemberPortfolioByCsvFileController {
 
     //TODO : call member-sevice to get member id
     Long memberId = 1L;//일단 임시로 1L로 설정
+    GetMemberCommand command = GetMemberCommand.builder().id(memberId).build();
+    Member member = getMemberUseCase.getMember(command);
 
-    registerMemberPortfolioByCsvUseCase.registerMemberPortfolioByCsvFile(memberId, file);
+    registerMemberPortfolioByCsvUseCase.registerMemberPortfolioByCsvFile(member, file);
 
     return;
   }

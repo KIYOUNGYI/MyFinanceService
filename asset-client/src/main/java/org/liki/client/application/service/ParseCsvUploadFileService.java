@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.liki.client.application.port.in.ParseCsvUploadFileUseCase;
 import org.liki.client.domain.CsvPortfolioElement;
@@ -33,6 +34,7 @@ public class ParseCsvUploadFileService implements ParseCsvUploadFileUseCase {
 
         // convert `CsvToBean` object to list of PortfolioElement
         List<CsvPortfolioElement> csvPortfolioElements = csvToBean.parse();
+        csvPortfolioElements = csvPortfolioElements.stream().filter(t -> !t.getTicker().equals("")).collect(Collectors.toList());
         log.info("portfolioElements: {}", csvPortfolioElements);
 
         return csvPortfolioElements;
