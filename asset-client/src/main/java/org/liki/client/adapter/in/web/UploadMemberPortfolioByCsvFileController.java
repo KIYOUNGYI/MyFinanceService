@@ -1,22 +1,15 @@
 package org.liki.client.adapter.in.web;
 
-import com.sun.xml.bind.v2.TODO;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
-import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.liki.client.application.port.in.RegisterMemberPortfolioByCsvUseCase;
 import org.liki.common.WebAdapter;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 
 @WebAdapter
@@ -25,13 +18,19 @@ import java.io.InputStreamReader;
 @Slf4j
 public class UploadMemberPortfolioByCsvFileController {
 
-
-  //TODO: 인증/권한 체크
+  private final RegisterMemberPortfolioByCsvUseCase registerMemberPortfolioByCsvUseCase;
 
   @PostMapping("/api/portfolio/upload-csv")
-  public void registerMemberPortfolioByCsvFile(@RequestParam("file") MultipartFile file) throws IOException {
+  public void registerMemberPortfolioByCsvFile(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
 
+    //TODO : token validation
 
+    //TODO : call member-sevice to get member id
+    Long memberId = 1L;//일단 임시로 1L로 설정
+
+    registerMemberPortfolioByCsvUseCase.registerMemberPortfolioByCsvFile(memberId, file);
+
+    return;
   }
 
 

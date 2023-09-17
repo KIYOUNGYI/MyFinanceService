@@ -1,4 +1,4 @@
-package org.liki.client.adapter.out.persistence;
+package org.liki.client.adapter.out.persistence.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

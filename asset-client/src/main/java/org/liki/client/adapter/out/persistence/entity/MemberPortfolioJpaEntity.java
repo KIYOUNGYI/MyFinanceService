@@ -1,4 +1,4 @@
-package org.liki.client.adapter.out.persistence;
+package org.liki.client.adapter.out.persistence.entity;
 
 import static javax.persistence.FetchType.LAZY;
 
@@ -14,21 +14,27 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Entity
-@Table(name = "member_cash")
-//@Data
-@Getter
-@AllArgsConstructor
+@Table(name = "member_portfolio")
 @NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Slf4j
-public class MemberCashJpaEntity {
+public class MemberPortfolioJpaEntity {
 
   @Id
   @GeneratedValue
-  private Long memberCashId;
+  private Long id;
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "member_id")
   private MemberJpaEntity memberJpaEntity;
 
-  private Double cashAmount;
+  @ManyToOne(fetch = LAZY)
+  @JoinColumn(name = "stock_info_id")
+  private StockInfoJpaEntity stockInfo;
+
+  private Long stockCount;
+
+  private Double averagePrice;//us dollar
+
 }

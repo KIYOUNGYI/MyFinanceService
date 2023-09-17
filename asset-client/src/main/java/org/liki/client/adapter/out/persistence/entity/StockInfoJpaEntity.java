@@ -1,4 +1,4 @@
-package org.liki.client.adapter.out.persistence;
+package org.liki.client.adapter.out.persistence.entity;
 
 import java.sql.Timestamp;
 import java.time.Instant;
