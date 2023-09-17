@@ -18,4 +18,6 @@
 
 ## Googling 레퍼런스
 - https://attacomsian.com/blog/spring-boot-upload-parse-csv-file
+- Querydsl 사용 중 Qclass 인식이 되지 않을 때
+  - https://velog.io/@hyeonny/Spring-Querydsl-%EC%82%AC%EC%9A%A9-%EC%A4%91-Qclass-%EC%9D%B8%EC%8B%9D%EC%9D%B4-%EB%90%98%EC%A7%80-%EC%95%8A%EC%9D%84-%EB%95%8C
 
