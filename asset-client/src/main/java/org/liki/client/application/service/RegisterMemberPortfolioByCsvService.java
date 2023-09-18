@@ -58,14 +58,12 @@ public class RegisterMemberPortfolioByCsvService implements RegisterMemberPortfo
         stockInfoJpaEntity = stockInfoMapByTickersMap.get(ticker.toLowerCase());
       }
 
-      MemberPortfolioCommand build = MemberPortfolioCommand.builder()
+      memberPortfolioCommandList.add(MemberPortfolioCommand.builder()
           .memberJpaEntity(memberJpaEntity)
           .stockInfoJpaEntity(stockInfoJpaEntity)
           .count(csvPortfolioElement.getCount())
           .avgPrice(csvPortfolioElement.getAvgPrice())
-          .build();
-
-      memberPortfolioCommandList.add(build);
+          .build());
     }
 
     List<MemberPortfolioJpaEntity> memberPortfolio = registerMemberPortfolioPort.createMemberPortfolio(memberPortfolioCommandList);

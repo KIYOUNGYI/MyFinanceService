@@ -26,7 +26,7 @@ public class RegisterMemberPortfolioByCsvFileController {
     //TODO : token validation
 
     //TODO : call member-sevice to get member id
-    Long memberId = 10L;//일단 임시로 1L로 설정
+    Long memberId = 10L;//일단 임시로 10L로 설정
 
     registerMemberPortfolioByCsvUseCase.registerMemberPortfolioByCsvFile(memberId, file);
 
