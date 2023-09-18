@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,10 +32,17 @@ public class MemberPortfolioJpaEntity {
 
   @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "stock_info_id")
-  private StockInfoJpaEntity stockInfo;
+  private StockInfoJpaEntity stockInfoJpaEntity;
 
   private Long stockCount;
 
   private Double averagePrice;//us dollar
 
+  @Builder
+  public MemberPortfolioJpaEntity(MemberJpaEntity memberJpaEntity, StockInfoJpaEntity stockInfoJpaEntity, Long stockCount, Double averagePrice) {
+    this.memberJpaEntity = memberJpaEntity;
+    this.stockInfoJpaEntity = stockInfoJpaEntity;
+    this.stockCount = stockCount;
+    this.averagePrice = averagePrice;
+  }
 }

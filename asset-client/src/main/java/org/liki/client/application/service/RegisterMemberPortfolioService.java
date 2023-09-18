@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RegisterMemberPortfolioService implements RegisterMemberPortfolioUseCase {
 
+
   private final RegisterMemberPortfolioPort registerMemberPortfolioPort;
 
   @Override

@@ -29,14 +29,11 @@ public class StockInfoService implements GetStockInfoByTickersUseCase {
 
     List<StockInfoJpaEntity> stockInfosByTickers = getStockInfoByTickersPort.getStockInfosByTickers(tickers);
 
-    List<StockInfo> list = new ArrayList<>();
-
     Map<String, StockInfo> stockInfoMap = new HashMap<>();
 
     for (StockInfoJpaEntity stockInfosByTicker : stockInfosByTickers) {
 
       StockInfo stockInfo = StockInfoJpaEntityToDomainMapper.stockInfoJpaEntityToDomain(stockInfosByTicker);
-      list.add(stockInfo);
 
       stockInfoMap.put(stockInfo.getTicker(), stockInfo);
     }

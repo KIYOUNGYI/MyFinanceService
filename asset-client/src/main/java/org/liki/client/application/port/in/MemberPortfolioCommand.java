@@ -5,8 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import org.liki.client.domain.Member;
-import org.liki.client.domain.StockInfo;
+import org.liki.client.adapter.out.persistence.entity.MemberJpaEntity;
+import org.liki.client.adapter.out.persistence.entity.StockInfoJpaEntity;
 
 @Builder
 @Data
@@ -16,20 +16,20 @@ public class MemberPortfolioCommand {
 
 
   @NotNull
-  private final Member member;
+  private final MemberJpaEntity memberJpaEntity;
 
   @NotNull
-  private final StockInfo stockInfo;
+  private final StockInfoJpaEntity stockInfoJpaEntity;
 
   @NotNull
   private final Double avgPrice;
 
   @NotNull
-  private final String count;
+  private final Long count;
 
-  public MemberPortfolioCommand( Member member, StockInfo stockInfo, Double avgPrice, String count) {
-    this.member = member;
-    this.stockInfo = stockInfo;
+  public MemberPortfolioCommand(MemberJpaEntity memberJpaEntity, StockInfoJpaEntity stockInfoJpaEntity, Double avgPrice, Long count) {
+    this.memberJpaEntity = memberJpaEntity;
+    this.stockInfoJpaEntity = stockInfoJpaEntity;
     this.avgPrice = avgPrice;
     this.count = count;
   }
