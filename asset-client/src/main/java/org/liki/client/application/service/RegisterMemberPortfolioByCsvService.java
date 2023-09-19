@@ -14,6 +14,7 @@ import org.liki.client.application.port.in.ParseCsvUploadFileUseCase;
 import org.liki.client.application.port.in.RegisterMemberPortfolioByCsvUseCase;
 import org.liki.client.application.port.out.GetMemberPort;
 import org.liki.client.application.port.out.GetStockInfoByTickersPort;
+import org.liki.client.application.port.out.RegisterMemberCashPort;
 import org.liki.client.application.port.out.RegisterMemberPortfolioPort;
 import org.liki.client.domain.CsvPortfolioElement;
 import org.liki.common.UseCase;
@@ -35,6 +36,8 @@ public class RegisterMemberPortfolioByCsvService implements RegisterMemberPortfo
   private final GetMemberPort getMemberPort;
 
   private final RegisterMemberPortfolioPort registerMemberPortfolioPort;
+
+  private final RegisterMemberCashPort registerMemberCashPort;
 
   @Override
   public void registerMemberPortfolioByCsvFile(Long memberId, MultipartFile file) {
@@ -68,6 +71,14 @@ public class RegisterMemberPortfolioByCsvService implements RegisterMemberPortfo
 
     List<MemberPortfolioJpaEntity> memberPortfolio = registerMemberPortfolioPort.createMemberPortfolio(memberPortfolioCommandList);
     log.info("memberPortfolio = {}", memberPortfolio);
+
+    for (CsvPortfolioElement csvPortfolioElement : csvPortfolioElements) {
+      if (csvPortfolioElement.getTicker().equals("usd") || csvPortfolioElement.getTicker().equals("USD")) {
+        Double cashAmount = csvPortfolioElement.getAvgPrice();
+        registerMemberCashPort.registerMemberCash(memberJpaEntity, cashAmount);
+        break;
+      }
+    }
 
   }
 }

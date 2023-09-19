@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @Table(name = "member_cash")
 //@Data
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Slf4j
 public class MemberCashJpaEntity {
 
@@ -31,4 +32,10 @@ public class MemberCashJpaEntity {
   private MemberJpaEntity memberJpaEntity;
 
   private Double cashAmount;
+
+  @Builder
+  public MemberCashJpaEntity(MemberJpaEntity memberJpaEntity, Double cashAmount) {
+    this.memberJpaEntity = memberJpaEntity;
+    this.cashAmount = cashAmount;
+  }
 }
