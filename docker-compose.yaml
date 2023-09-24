@@ -58,6 +58,14 @@ services:
         - SPRING_DATASOURCE_PASSWORD=mysqlpw
         - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
         - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    yahoo-rest-api-service:
+      networks:
+        - my_network
+      build:
+        context: ./yahoo-rest-api-service
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
 networks:
   my_network:
     driver: bridge
