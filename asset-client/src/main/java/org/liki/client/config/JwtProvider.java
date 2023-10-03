@@ -1,4 +1,4 @@
-package org.liki.member.config;
+package org.liki.client.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
@@ -9,8 +9,8 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import lombok.RequiredArgsConstructor;
-import org.liki.member.domain.AuthPayload;
-import org.liki.member.domain.JwtTokenResponse;
+import org.liki.client.domain.AuthPayload;
+import org.liki.client.domain.JwtTokenResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -101,6 +101,18 @@ public class JwtProvider {
       throw new RuntimeException(e);
     }
 
+  }
+
+  public Long parseJwtTokenAndReturnMemberId(String token) {
+
+    Claims claims = parseJwtToken(token);
+    LinkedHashMap payload = (LinkedHashMap) claims.get("payload");
+
+    Integer memberId = (Integer) payload.get("memberId");
+
+    long l = Integer.toUnsignedLong(memberId);
+
+    return l;
   }
 
   public AuthPayload parseJwtTokenAndReturnMember(String token) {

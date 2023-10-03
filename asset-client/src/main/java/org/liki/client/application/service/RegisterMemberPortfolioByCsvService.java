@@ -51,7 +51,9 @@ public class RegisterMemberPortfolioByCsvService implements RegisterMemberPortfo
 
     List<MemberPortfolioCommand> memberPortfolioCommandList = new ArrayList<>();
 
-    for (CsvPortfolioElement csvPortfolioElement : csvPortfolioElements) {
+    List<CsvPortfolioElement> filteredElements = csvPortfolioElements.stream().filter(t -> !t.getTicker().equals("usd")).collect(Collectors.toList());
+
+    for (CsvPortfolioElement csvPortfolioElement : filteredElements) {
 
       String ticker = csvPortfolioElement.getTicker();
       StockInfoJpaEntity stockInfoJpaEntity = stockInfoMapByTickersMap.get(ticker);
@@ -60,6 +62,13 @@ public class RegisterMemberPortfolioByCsvService implements RegisterMemberPortfo
       if (stockInfoJpaEntity == null) {
         stockInfoJpaEntity = stockInfoMapByTickersMap.get(ticker.toLowerCase());
       }
+
+//      if (stockInfoJpaEntity == null) {
+////        stockInfoJpaEntity = stockInfoMapByTickersMap.get(ticker.toUpperCase());
+//
+//        continue;
+//      }
+
 
       memberPortfolioCommandList.add(MemberPortfolioCommand.builder()
           .memberJpaEntity(memberJpaEntity)
