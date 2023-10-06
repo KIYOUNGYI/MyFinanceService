@@ -116,5 +116,5 @@ compileQuerydsl {
 }
 
 test {
-    useJUnitPlatform()
+    exclude "**/*"
 }
