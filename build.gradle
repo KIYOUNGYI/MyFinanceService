@@ -1,5 +1,15 @@
+buildscript {
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.1.RELEASE"
+    }
+}
+
 plugins {
+    id 'com.palantir.docker' version '0.25.0'
+//    id 'org.springframework.boot' version '2.7.13'
+    id 'org.springframework.boot' version '2.5.15'//swagger 때문에 일부러 다운그레이드해서 테스트 (spring.mvc.pathmatch.matching-strategy=ANT_PATH_MATCHER <- )
     id 'java'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 group 'org.liki'
@@ -8,18 +18,48 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
+subprojects {
+    compileJava {
+        sourceCompatibility = 11
+        targetCompatibility = 11
+    }
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
 
-dependencies {
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    repositories {
+        mavenCentral()
+    }
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+//        implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+//        implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+//        testImplementation 'com.tngtech.archunit:archunit:1.0.1'
+//        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+            testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
-    implementation 'org.springframework.kafka:spring-kafka'
+        implementation 'org.springframework.boot:spring-boot-starter-aop'
+        implementation 'org.springframework.kafka:spring-kafka'
+    }
 }
+//
+//dependencies {
+//    compileOnly 'org.projectlombok:lombok'
+//    annotationProcessor 'org.projectlombok:lombok'
+//    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+//
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+//
+//    implementation 'org.springframework.boot:spring-boot-starter-aop'
+//    implementation 'org.springframework.kafka:spring-kafka'
+//}
 
 test {
     exclude "**/*"
