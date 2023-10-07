@@ -12,8 +12,8 @@ import lombok.Value;
 public class Member {
 
   private final String memberId;
-  private final String email;
   private final String memberName;
+  private final String email;
   private final boolean isValid;
 
   public static Member generateMember(
@@ -24,9 +24,9 @@ public class Member {
   ) {
     return new Member(
         memberId.memberId,
-        memberName.name,
-        memberEmail.emailValue,
-        memberIsValid.isValidValue
+        memberName.memberName,
+        memberEmail.email,
+        memberIsValid.isValid
     );
   }
   @Value
@@ -41,25 +41,25 @@ public class Member {
   public static class MemberName {
 
     public MemberName(String value) {
-      this.name = value;
+      this.memberName = value;
     }
-    String name;
+    String memberName;
   }
   @Value
   public static class MemberIsValid {
 
-    public MemberIsValid(boolean isValidValue) {
-      this.isValidValue = isValidValue;
+    public MemberIsValid(boolean isValid) {
+      this.isValid = isValid;
     }
-    boolean isValidValue;
+    boolean isValid;
   }
   @Value
   public static class MemberEmail {
 
     public MemberEmail(String value) {
-      this.emailValue = value;
+      this.email = value;
     }
-    String emailValue;
+    String email;
   }
 
 }

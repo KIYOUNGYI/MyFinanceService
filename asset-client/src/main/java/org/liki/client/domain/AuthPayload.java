@@ -1,0 +1,10 @@
+package org.liki.client.domain;
+
+import lombok.Data;
+
+@Data
+public class AuthPayload {
+
+  private Long memberId;
+  private String email;
+}

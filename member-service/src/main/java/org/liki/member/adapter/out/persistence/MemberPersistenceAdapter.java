@@ -23,9 +23,9 @@ public class MemberPersistenceAdapter implements RegisterMemberPort, GetMemberPo
 
     return membershipRepository.save(
         new MemberJpaEntity(
-            membershipName.getName(),
-            membershipEmail.getEmailValue(),
-            membershipIsValid.isValidValue()
+            membershipName.getMemberName(),
+            membershipEmail.getEmail(),
+            membershipIsValid.isValid()
         )
     );
   }

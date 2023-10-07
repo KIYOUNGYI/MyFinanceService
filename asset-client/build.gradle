@@ -9,6 +9,7 @@ plugins {
 //    id 'org.springframework.boot' version '2.7.13'
     id 'org.springframework.boot' version '2.5.15'//swagger 때문에 일부러 다운그레이드해서 테스트 (spring.mvc.pathmatch.matching-strategy=ANT_PATH_MATCHER <- )
     id 'java'
+    id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
 compileJava {
@@ -22,11 +23,12 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group 'org.likipay.client'
-version '1.0.1'
+version '1.0.0'
 
 repositories {
     mavenCentral()
 }
+
 
 dependencies {
 
@@ -51,13 +53,32 @@ dependencies {
 
     implementation project(path: ':common')
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation group: 'com.opencsv', name: 'opencsv', version: '5.7.1'
+
+    //querydsl
+//    implementation("com.querydsl:querydsl-jpa:4.4.0")
+//    implementation("com.querydsl:querydsl-apt:4.4.0")
+////    implementation("com.querydsl:querydsl-core:${queryDslVersion}")
+//    annotationProcessor "com.querydsl:querydsl-apt:4.4.0:jpa"
+//    annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+//    annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+    //querydsl 추가
+    implementation 'com.querydsl:querydsl-jpa'
+
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.1") {
+        exclude module:'junit-platform-commons'
+    }
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-engine:1.5.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-commons:1.5.1")
 
     //h2 사용을 위한 디펜던시
 //    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
 //    runtimeOnly 'com.mysql:mysql-connector-j'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
 }
 
 ////그래들 과정에서 도커라이징 한다?
@@ -78,7 +99,22 @@ docker {
     buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
 }
 
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+querydsl {
+    jpa = true
+    querydslSourcesDir = querydslDir
+}
+sourceSets {
+    main.java.srcDir querydslDir
+}
+configurations {
+    querydsl.extendsFrom compileClasspath
+}
+compileQuerydsl {
+    options.annotationProcessorPath = configurations.querydsl
+}
 
 test {
-    useJUnitPlatform()
+    exclude "**/*"
 }

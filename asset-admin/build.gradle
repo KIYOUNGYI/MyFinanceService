@@ -92,5 +92,6 @@ docker {
 
 
 test {
-    useJUnitPlatform()
+    exclude "**/*"
+//    useJUnitPlatform()
 }

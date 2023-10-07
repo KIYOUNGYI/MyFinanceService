@@ -18,7 +18,7 @@ public class RetrieveMemberController {
 
   private final GetMemberUseCase getMemberUseCase;
 
-  @GetMapping("/api/member/register/{id}")
+  @GetMapping("/api/member/{id}")
   Member getMember(@PathVariable Long id) {
 
     GetMemberCommand command = GetMemberCommand.builder().id(id).build();

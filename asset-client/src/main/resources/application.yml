@@ -1,0 +1,22 @@
+spring:
+  output:
+    ansi:
+      enabled: always
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-timeout: 20000
+      minimum-idle: 10
+      maximum-pool-size: 12
+      idle-timeout: 3000000
+      max-lifetime: 1200000
+  jpa:
+    open-in-view: false
+    show-sql: false
+    database: mysql
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 200
+jwt:
+  password: testPassword

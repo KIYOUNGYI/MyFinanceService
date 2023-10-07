@@ -1,0 +1,4 @@
+Flask==2.0.3
+flask-restx==1.1.0
+yahoo-fin==0.8.9.1
+yfinance==0.1.87

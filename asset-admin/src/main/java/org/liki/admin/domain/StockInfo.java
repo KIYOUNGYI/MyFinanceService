@@ -1,6 +1,5 @@
 package org.liki.admin.domain;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,7 +32,7 @@ import lombok.Value;
 @ToString
 public class StockInfo {
 
-  private Long idStockInfo;
+  private Long stockInfoId;
   private String companyName;
   private String ticker;
   private Double oneYearTargetEst;
@@ -54,9 +53,9 @@ public class StockInfo {
   private Double volume;
 
   @Builder
-  public StockInfo(Long idStockInfo, String companyName, String ticker, Double oneYearTargetEst, String fiftyTwoWeekRange, String ask, Double avgVolume, Double beta, String daysRange, Double eps,
+  public StockInfo(Long stockInfoId, String companyName, String ticker, Double oneYearTargetEst, String fiftyTwoWeekRange, String ask, Double avgVolume, Double beta, String daysRange, Double eps,
       String earningsDate, String exDividendDate, String forwardDividendAndYield, String marketCap, Double open, Double peRatio, Double previousClose, Double quotePrice, Double volume) {
-    this.idStockInfo = idStockInfo;
+    this.stockInfoId = stockInfoId;
     this.companyName = companyName;
     this.ticker = ticker;
     this.oneYearTargetEst = oneYearTargetEst;

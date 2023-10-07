@@ -4,4 +4,4 @@ include 'asset-admin'
 include 'asset-client'
 //include 'beta-calculate-service'
 include 'common'
-
+include 'logging-consumer'

@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SpringDataStockInfoRepository extends JpaRepository<StockInfoJpaEntity, Long> {
 
-      StockInfoJpaEntity getStockInfoJpaEntityByTicker(String ticker);
+  StockInfoJpaEntity getStockInfoJpaEntityByTicker(String ticker);
 }

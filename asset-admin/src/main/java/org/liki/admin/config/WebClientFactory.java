@@ -10,7 +10,7 @@ public class WebClientFactory {
 //  private final String MY_YAHOO_FIN_REST_API_URL = "http://172.16.101.49:3000";//일단 테스트니까
 //  private final String MY_YAHOO_FIN_REST_API_URL = "http://localhost:3000";//일단 테스트니까
 
-  private final String MY_YAHOO_FIN_REST_API_URL = "http://172.16.101.49:3000";
+  private final String MY_YAHOO_FIN_REST_API_URL = "http://yahoo-rest-api-service:3000";
 
 
   @Bean
