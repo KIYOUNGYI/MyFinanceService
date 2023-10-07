@@ -1,4 +1,4 @@
-package com.fastcampus.loggingconsumer;
+package org.liki.loggingconsumer;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -18,6 +18,9 @@ public class LoggingConsumer {
                            @Value("${logging.topic}")String topic) {
 
         Properties props = new Properties();
+
+        System.out.println(">> bootstrapServers = " + bootstrapServers);
+        System.out.println(">> topic = " + topic);
 
         props.put("bootstrap.servers", bootstrapServers);
 

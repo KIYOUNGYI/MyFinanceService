@@ -99,7 +99,7 @@ services:
         KAFKA_ADVERTISED_HOST_NAME: host.docker.internal
         BOOTSTRAP_SERVERS: host.docker.internal:9092
         KAFKA_ZOOKEEPER_CONNECT: "zk1:2181"
-        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 2
+        KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1 # 지금은 1개만 갖고 할 거라 1로 설정함
 
     kafka-ui:
       image: provectuslabs/kafka-ui
@@ -112,17 +112,17 @@ services:
         - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:9092
         - KAFKA_CLUSTERS_0_ZOOKEEPER=zk1:2181
 
-#  logging-consumer:
-#    image: fastcampus-pay-logging-consumer:1.0.0
-#    networks:
-#      - my_network
-#    restart: always
-#    depends_on:
-#      - kafka
-#      - zookeeper
-#    environment:
-#      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=host.docker.internal:9092
-#      - LOGGING_TOPIC=fastcampus.logging.out.stdout
+    logging-consumer:
+      image: logging-consumer:1.0.0
+      networks:
+        - my_network
+      restart: always
+      depends_on:
+        - kafka1
+        - zk1
+      environment:
+        - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=host.docker.internal:9092
+        - LOGGING_TOPIC=myfinance.logging.out.stdout
 networks:
   my_network:
     driver: bridge
