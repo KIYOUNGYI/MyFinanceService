@@ -1,4 +1,4 @@
-package org.liki.client.adapter.in.web;
+package org.liki.member.adapter.in.web;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ public class HealthController {
 
   @GetMapping("/api/health")
   public String healthCheck() {
-    log.info("asset-client healthCheck() called");
+    log.info("member-service healthCheck() called");
     return "Everything is fine!";
   }
 
