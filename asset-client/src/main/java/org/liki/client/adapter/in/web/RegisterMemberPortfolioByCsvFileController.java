@@ -44,4 +44,17 @@ public class RegisterMemberPortfolioByCsvFileController {
   }
 
 
+  @PostMapping("/api/portfolio/upload-csv/v2/{memberId}")
+  public void registerMemberPortfolioByCsvFileV2(HttpServletRequest request, @RequestParam("file") MultipartFile file, @PathVariable Long memberId) throws IOException {
+
+
+    System.out.println("memberId ==== > " + memberId);
+
+    registerMemberPortfolioByCsvUseCase.registerMemberPortfolioByCsvFileV2(memberId, file);
+
+    return;
+  }
+
+
+
 }

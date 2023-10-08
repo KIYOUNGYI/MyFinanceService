@@ -1,0 +1,31 @@
+#- SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/finance?useSSL=false&allowPublicKeyRetrieval=true
+#- SPRING_DATASOURCE_USERNAME=mysqluser
+#- SPRING_DATASOURCE_PASSWORD=mysqlpw
+#- SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL5InnoDBDialect
+#- SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/finance?useSSL=false&allowPublicKeyRetrieval=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: mysqluser
+    password: mysqlpw
+    hikari:
+      maximum-pool-size: 5
+jwt:
+  password: testPassword
+my:
+  yahoo:
+    api: localhost:3000
+
+service:
+  member:
+    url: http://localhost:8080 # 더미 url (로컬에서 뜨게끔 하려고)
+  stock-info:
+    url: http://localhost:8081 # 더미 url (로컬에서 뜨게끔 하려고)
+
+kakfa:
+  clusters:
+    bootstrapservers: 123 # 더미
+logging:
+  topic: 123 # 더미

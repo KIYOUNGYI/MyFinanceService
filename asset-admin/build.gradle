@@ -68,7 +68,7 @@ dependencies {
 //    runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'
 //    runtimeOnly 'com.mysql:mysql-connector-j'
-    testRuntimeOnly('com.h2database:h2')
+//    testRuntimeOnly('com.h2database:h2')
 
 }
 

@@ -64,14 +64,16 @@ services:
         - SPRING_JPA_HIBERNATE_DDL_AUTO=update
         - KAFKA_CLUSTERS_BOOTSTRAPSERVERS=host.docker.internal:9092
         - LOGGING_TOPIC=myfinance.logging.out.stdout
-#    yahoo-rest-api-service:
-#      networks:
-#        - my_network
-#      build:
-#        context: ./yahoo-rest-api-service
-#        dockerfile: Dockerfile
-#      ports:
-#        - "3000:3000"
+        - SERVICE_MEMBER_URL=http://member-service:8080 # 실제 어플리케이션 포트를 가리켜야함
+        - SERVICE_ASSET_ADMIN_URL=http://asset-admin:8080 # 실제 어플리케이션 포트를 가리켜야함
+    yahoo-rest-api-service:
+      networks:
+        - my_network
+      build:
+        context: ./yahoo-rest-api-service
+        dockerfile: Dockerfile
+      ports:
+        - "3000:3000"
     zk1:
       container_name: zookeeper1
       image: wurstmeister/zookeeper:latest
