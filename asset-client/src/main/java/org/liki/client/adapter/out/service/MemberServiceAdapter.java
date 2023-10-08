@@ -24,7 +24,6 @@ public class MemberServiceAdapter {
     try {
 
       String body = commonHttpClient.sendGetRequest(membershipServiceUrl + "/api/member/" + memberId).body();
-      System.out.println("body = " + body);
       ObjectMapper objectMapper = new ObjectMapper();
       Member member = objectMapper.readValue(body, Member.class);
 
