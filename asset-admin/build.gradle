@@ -5,7 +5,7 @@ buildscript {
 }
 
 plugins {
-    id 'com.palantir.docker' version '0.25.0'
+    id 'com.palantir.docker' version '0.35.0'
 //    id 'org.springframework.boot' version '2.7.13'
     id 'org.springframework.boot' version '2.5.15'//swagger 때문에 일부러 다운그레이드해서 테스트 (spring.mvc.pathmatch.matching-strategy=ANT_PATH_MATCHER <- )
     id 'java'
