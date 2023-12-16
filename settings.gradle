@@ -5,3 +5,5 @@ include 'asset-client'
 //include 'beta-calculate-service'
 include 'common'
 include 'logging-consumer'
+include 'beta-calculate-service'
+
