@@ -1,0 +1,11 @@
+FROM gradle:latest as builder
+
+WORKDIR /workspace/app
+
+COPY . /workspace/app/
+
+RUN ./gradlew build -p ${MODULE}
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","${MODULE}/build/libs/${MODULE}.jar"]

@@ -56,3 +56,7 @@ docker {
     //Dockerfile 에 전달할 인자
     buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
 }
+
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}
