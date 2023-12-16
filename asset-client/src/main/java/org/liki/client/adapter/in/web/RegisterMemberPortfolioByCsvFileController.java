@@ -44,4 +44,19 @@ public class RegisterMemberPortfolioByCsvFileController {
   }
 
 
+  /**
+   * member-service, admin-service 외부 호출해서 필요한 정보 get 해와서 처리하는 방식으로 구현
+   */
+  @PostMapping("/api/portfolio/upload-csv/v2/{memberId}")
+  public void registerMemberPortfolioByCsvFileV2(HttpServletRequest request, @RequestParam("file") MultipartFile file, @PathVariable Long memberId) throws IOException {
+
+    log.info("memberId : {}", memberId);
+
+    registerMemberPortfolioByCsvUseCase.registerMemberPortfolioByCsvFileV2(memberId, file);
+
+    return;
+  }
+
+
+
 }

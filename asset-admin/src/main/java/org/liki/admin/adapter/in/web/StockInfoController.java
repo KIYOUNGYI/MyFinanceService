@@ -1,6 +1,8 @@
 package org.liki.admin.adapter.in.web;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.liki.admin.application.port.in.GetStockInfoListUseCase;
 import org.liki.admin.application.port.in.GetStockInfoUseCase;
 import org.liki.admin.application.port.in.RegisterOrUpdateStockInfoUseCase;
 import org.liki.admin.application.port.in.UpdateStockBetaUseCase;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @WebAdapter
@@ -20,6 +23,8 @@ public class StockInfoController {
 
   private final RegisterOrUpdateStockInfoUseCase registerOrUpdateStockInfoUseCase;
   private final GetStockInfoUseCase getStockInfoUseCase;
+
+  private final GetStockInfoListUseCase getStockInfoListUseCase;
 
   private final UpdateStockBetaUseCase updateStockBetaUseCase;
 
@@ -41,5 +46,11 @@ public class StockInfoController {
     StockInfo stockInfo = updateStockBetaUseCase.updateStockBeta(ticker, request.getBeta());
 
     return stockInfo;
+  }
+
+  @GetMapping("/api/stockInfo")
+  List<StockInfo> getStockInfos(@RequestParam List<String> tickers) {
+
+    return getStockInfoListUseCase.getStockInfoList(tickers);
   }
 }

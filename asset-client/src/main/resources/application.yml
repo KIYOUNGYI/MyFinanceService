@@ -20,3 +20,9 @@ spring:
         default_batch_fetch_size: 200
 jwt:
   password: testPassword
+
+service:
+  member:
+    url: http://localhost:8080 # 더미 url (로컬에서 뜨게끔 하려고)
+  stock-info:
+    url: http://localhost:8081 # 더미 url (로컬에서 뜨게끔 하려고)

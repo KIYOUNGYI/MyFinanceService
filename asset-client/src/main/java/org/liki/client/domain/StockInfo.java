@@ -52,6 +52,9 @@ public class StockInfo {
   private Double quotePrice;
   private Double volume;
 
+  public StockInfo() {
+  }
+
   @Builder
   public StockInfo(Long stockInfoId, String companyName, String ticker, Double oneYearTargetEst, String fiftyTwoWeekRange, String ask, Double avgVolume, Double beta, String daysRange, Double eps,
       String earningsDate, String exDividendDate, String forwardDividendAndYield, String marketCap, Double open, Double peRatio, Double previousClose, Double quotePrice, Double volume) {
