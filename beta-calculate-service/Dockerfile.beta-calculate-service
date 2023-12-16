@@ -1,0 +1,11 @@
+FROM gradle:latest as builder
+
+WORKDIR /workspace/app
+
+COPY . /workspace/app/
+
+RUN ./gradlew build -p beta-calculate-service
+
+EXPOSE 8080
+
+ENTRYPOINT ["java","-jar","beta-calculate-service/build/libs/beta-calculate-service-1.0.0.jar"]
